@@ -73,6 +73,15 @@ class DemoSeeder extends Seeder
             'payment_method' => PaymentMethod::Card,
             'status' => BookingStatus::Assigned,
         ]);
+
+        Booking::create([
+            'user_id' => $demo->id,
+            'premise' => Premise::Hall,
+            'banquet_date' => Carbon::today()->subDays(20),
+            'payment_method' => PaymentMethod::Online,
+            'status' => BookingStatus::Completed,
+        ]);
+
         // фейк отзыв
         $completedBooking->review()->create([
             'user_id' => $demo->id,
