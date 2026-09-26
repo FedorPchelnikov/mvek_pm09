@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Premise;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,14 @@ Route::get('/', fn () => view('welcome', ['premises' => Premise::options()]))->n
 Route::get('cabinet', [CabinetController::class, 'index'])
     ->middleware('auth')
     ->name('cabinet');
+
+Route::get('bookings/create', [BookingController::class, 'create'])
+    ->middleware('auth')
+    ->name('bookings.create');
+
+Route::post('bookings', [BookingController::class, 'store'])
+    ->middleware('auth')
+    ->name('bookings.store');
 
 Route::post('bookings/{booking}/review', [ReviewController::class, 'store'])
     ->middleware('auth')

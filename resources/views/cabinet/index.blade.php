@@ -51,7 +51,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold text-gray-800">Мои заявки</h3>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <h3 class="text-base font-semibold text-gray-800">Мои заявки</h3>
+
+                    <a href="{{ route('bookings.create') }}" class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500">
+                        Оформить заявку
+                    </a>
+                </div>
 
                 @if ($bookings->isEmpty())
                     <p class="mt-3 text-sm text-gray-500">У вас пока нет заявок.</p>
