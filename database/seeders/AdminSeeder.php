@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
 {
-    // УЗ админа
     public function run(): void
     {
         User::updateOrCreate(

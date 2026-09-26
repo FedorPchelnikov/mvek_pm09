@@ -9,7 +9,6 @@ return [
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
-
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -23,10 +22,6 @@ return [
             'model' => env('AUTH_MODEL', User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     'passwords' => [
