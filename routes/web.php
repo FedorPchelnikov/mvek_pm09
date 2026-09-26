@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Premise;
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\ReviewController;
@@ -23,5 +24,14 @@ Route::post('bookings', [BookingController::class, 'store'])
 Route::post('bookings/{booking}/review', [ReviewController::class, 'store'])
     ->middleware('auth')
     ->name('reviews.store');
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/', [AdminBookingController::class, 'index'])->name('bookings.index');
+
+        Route::patch('bookings/{booking}', [AdminBookingController::class, 'update'])->name('bookings.update');
+    });
 
 require __DIR__.'/auth.php';

@@ -12,6 +12,12 @@
                     <x-nav-link :href="route('cabinet')" :active="request()->routeIs('cabinet')">
                         Личный кабинет
                     </x-nav-link>
+
+                    @if (Auth::user()->is_admin)
+                        <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                            Панель управления
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -59,6 +65,12 @@
             <x-responsive-nav-link :href="route('cabinet')" :active="request()->routeIs('cabinet')">
                 Личный кабинет
             </x-responsive-nav-link>
+
+            @if (Auth::user()->is_admin)
+                <x-responsive-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                    Панель управления
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <div class="pt-4 pb-1 border-t border-gray-200">
