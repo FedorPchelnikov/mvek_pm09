@@ -11,7 +11,6 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-
     public function create(): View
     {
         return view('auth.login');
@@ -23,7 +22,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $redirect = $request->user()->is_admin
+            ? '/admin'
+            : route('cabinet', absolute: false);
+
+        return redirect()->intended($redirect);
     }
 
     public function destroy(Request $request): RedirectResponse
