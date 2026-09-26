@@ -1,9 +1,9 @@
-@props(['count' => 4])
+@props(['images' => []])
 
 <div
     x-data="{
         current: 0,
-        total: {{ (int) $count }},
+        total: {{ count($images) }},
         timer: null,
         start() {
             this.stop();
@@ -30,20 +30,17 @@
     @mouseenter="stop()"
     @mouseleave="start()"
 >
-    <div class="relative h-56 sm:h-72 lg:h-96 overflow-hidden rounded-lg">
-        @for ($i = 0; $i < (int) $count; $i++)
-            <div
+    <div class="relative h-56 sm:h-72 lg:h-96 overflow-hidden rounded-lg bg-gray-100">
+        @foreach ($images as $index => $image)
+            <img
                 x-cloak
-                x-show="current === {{ $i }}"
+                x-show="current === {{ $index }}"
                 x-transition.opacity
-                class="absolute inset-0 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50"
+                src="{{ asset($image['src']) }}"
+                alt="{{ $image['alt'] }}"
+                class="absolute inset-0 h-full w-full object-cover"
             >
-                <div class="px-6 text-center">
-                    <p class="text-sm font-medium text-gray-500">Изображение {{ $i + 1 }} из {{ (int) $count }}</p>
-                    <p class="mt-1 text-xs text-gray-400">Место под ссылку на изображение</p>
-                </div>
-            </div>
-        @endfor
+        @endforeach
 
         <button
             type="button"
@@ -68,15 +65,15 @@
         </button>
     </div>
 
-    <div class="mt-4 flex justify-center gap-2">
-        @for ($i = 0; $i < (int) $count; $i++)
+    <div class="mt-4 flex flex-wrap justify-center gap-2">
+        @foreach ($images as $index => $image)
             <button
                 type="button"
-                @click="go({{ $i }})"
-                aria-label="Изображение {{ $i + 1 }}"
+                @click="go({{ $index }})"
+                aria-label="Показать: {{ $image['alt'] }}"
                 class="h-2.5 w-2.5 rounded-full transition"
-                :class="current === {{ $i }} ? 'bg-indigo-600' : 'bg-gray-300'"
+                :class="current === {{ $index }} ? 'bg-indigo-600' : 'bg-gray-300'"
             ></button>
-        @endfor
+        @endforeach
     </div>
 </div>

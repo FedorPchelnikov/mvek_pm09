@@ -55,21 +55,19 @@
             </section>
 
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                <x-slider :count="4" />
+                <x-slider :images="$gallery" />
             </section>
 
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
                 <h2 class="text-xl font-semibold text-gray-800">Помещения</h2>
 
                 <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    @foreach ($premises as $value => $label)
+                    @foreach ($premises as $premise)
                         <article class="overflow-hidden rounded-lg bg-white shadow-sm">
-                            <div class="flex h-40 items-center justify-center border-b-2 border-dashed border-gray-200 bg-gray-50 px-4">
-                                <span class="text-center text-xs text-gray-400">Место под ссылку на изображение</span>
-                            </div>
+                            <img src="{{ asset($premise->image()) }}" alt="{{ $premise->label() }}" class="h-40 w-full object-cover">
 
                             <div class="p-4">
-                                <h3 class="font-medium text-gray-800">{{ $label }}</h3>
+                                <h3 class="font-medium text-gray-800">{{ $premise->label() }}</h3>
                             </div>
                         </article>
                     @endforeach

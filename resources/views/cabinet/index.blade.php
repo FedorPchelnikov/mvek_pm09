@@ -46,7 +46,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <x-slider :count="4" />
+                    <x-slider :images="$gallery" />
                 </div>
             </div>
 
